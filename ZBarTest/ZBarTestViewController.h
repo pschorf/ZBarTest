@@ -17,6 +17,7 @@
 }
 @property (nonatomic, retain) IBOutlet UIImageView *resultImage;
 @property (nonatomic, retain) IBOutlet UITextView *resultText;
+@property (nonatomic, retain) ZBarReaderView *readerView;
 - (IBAction) scanButtonTapped;
 
 @end

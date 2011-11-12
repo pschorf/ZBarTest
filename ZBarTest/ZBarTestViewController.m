@@ -9,7 +9,7 @@
 #import "ZBarTestViewController.h"
 
 @implementation ZBarTestViewController
-@synthesize resultImage, resultText;
+@synthesize resultImage, resultText, readerView;
 
 - (void)didReceiveMemoryWarning
 {
@@ -22,7 +22,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	ZBarReaderView* view = [ZBarReaderView new];
+    view.readerDelegate = self;
+    [self setReaderView:view];
+    [self.view addSubview:view];
 }
 
 - (void)viewDidUnload
@@ -88,16 +91,10 @@
     for(symbol in results)
         // EXAMPLE: just grab the first barcode
         break;
+    [resultText setText:symbol.data];
+    [self.readerView removeFromSuperview];
+
     
-    // EXAMPLE: do something useful with the barcode data
-    resultText.text = symbol.data;
-    
-    // EXAMPLE: do something useful with the barcode image
-    resultImage.image =
-    [info objectForKey: UIImagePickerControllerOriginalImage];
-    
-    // ADD: dismiss the controller (NB dismiss from the *reader*!)
-    [reader dismissModalViewControllerAnimated: YES];
 }
 
 
